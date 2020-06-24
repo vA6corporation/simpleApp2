@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Connection {
     private HttpsURLConnection urlConnection;
-    private static final String TAG = "pichula";
+    private static final String TAG = "PICHULA";
 
     public JSONArray fetchData() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

@@ -12,8 +12,7 @@ import com.example.simpleapp.R;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.Datos> {
-
+public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
     ArrayList<String> listDatos;
 
     public Adapter(ArrayList<String> listDatos) {
@@ -22,14 +21,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Datos> {
 
     @NonNull
     @Override
-    public Datos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_payment, null, false);
-        return new Datos(view);
+    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_payment, null, false);
+        return new Holder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.Datos holder, int position) {
-
+    public void onBindViewHolder(@NonNull Holder holder, int position) {
+        holder.asignarDatos(listDatos.get(position));
     }
 
     @Override
@@ -37,13 +37,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Datos> {
         return listDatos.size();
     }
 
-    public class Datos extends RecyclerView.ViewHolder {
+    public static class Holder extends RecyclerView.ViewHolder {
 
-        TextView item;
+        TextView dato;
 
-        public Datos(@NonNull View itemView) {
+        public Holder(@NonNull View itemView) {
             super(itemView);
-            item = itemView.findViewById(R.id.item_payment);
+            dato = (TextView) itemView.findViewById(R.id.item_title);
+        }
+
+        public void asignarDatos(String s) {
+            dato.setText(s);
         }
     }
 }
