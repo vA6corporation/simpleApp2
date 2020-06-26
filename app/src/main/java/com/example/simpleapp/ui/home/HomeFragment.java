@@ -2,15 +2,17 @@ package com.example.simpleapp.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.VerifiedInputEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import android.util.Log;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
@@ -60,7 +63,34 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Adapter adapter = new Adapter(listDatos);
+        AdapterView adapter = new AdapterView(listDatos);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "CHULAPI", Toast.LENGTH_SHORT).show();
+                Log.e("PICHULA", "AGARRAMELA");
+                //NavController navController = Navigation.findNavController(view, R.id.nav_host_fragment);
+                //NavHostFragment.findNavController(view);
+                //Navigation.findNavController(view);
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_nav_edit);
+                //Navigation.findNavController(view).navigate(R.id.viewTransactionsAction);
+            }
+        });
+
+        adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemEdiClick(int position) {
+                Log.e("PICHULA", "POSITION EDIT: " + position);
+            }
+
+            //@Override
+            public void onItemDeleteClick(int position) {
+                Log.e("PICHULA", "POSITION DELETE: " + position);
+                //changeItem(position, "Clicked");
+            }
+        });
+
         recycler.setAdapter(adapter);
     }
 }
