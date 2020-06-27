@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_edit"
             app:destination="@id/nav_edit" />
+        <argument
+            android:name="paymentMethodId"
+            app:argType="integer" />
     </fragment>
 
     <fragment

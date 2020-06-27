@@ -27,6 +27,8 @@ public class EditFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        int position = getArguments().getInt("position");
+
         mViewModel = ViewModelProviders.of(this).get(EditViewModel.class);
         // TODO: Use the ViewModel
     }

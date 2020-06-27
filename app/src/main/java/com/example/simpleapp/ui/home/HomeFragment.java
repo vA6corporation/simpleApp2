@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         JSONArray paymentMethods = connection.fetchData();
         ArrayList<String> listDatos = new ArrayList<String>();
@@ -81,12 +81,17 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemEdiClick(int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
                 Log.e("PICHULA", "POSITION EDIT: " + position);
             }
 
             //@Override
             public void onItemDeleteClick(int position) {
                 Log.e("PICHULA", "POSITION DELETE: " + position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_nav_edit, bundle);
                 //changeItem(position, "Clicked");
             }
         });
